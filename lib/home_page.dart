@@ -23,91 +23,106 @@ class _HomePageState extends State<HomePage> {
 
   buildBody(){
     return Padding(
-        padding: EdgeInsets.all(20),
-        child: ListView(
-          children: [
-            Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      'https://static.vecteezy.com/system/resources/previews/019/879/186/large_2x/user-icon-on-transparent-background-free-png.png',
-                    ),
-                  ),
-                  Text('Username'),
-                ],
-              ),
-            ),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Destaques da Semana'),
-                  Image.network(
-                    'https://wallpaperaccess.com/full/902489.jpg',
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.circle, size: 10),
-                      Icon(Icons.circle, size: 10),
-                      Icon(Icons.circle, size: 10),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            GridView(gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 5),
+      padding: EdgeInsets.all(20),
+      child: ListView(
+        children: [
+          Container(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-                buildContainer(),
-              ]
-            )
-          ],
-        )
+                ClipRRect(
+                  child: Image.network(
+                    'https://static.vecteezy.com/system/resources/previews/019/879/186/large_2x/user-icon-on-transparent-background-free-png.png', width: 50, height: 50,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text('Username'),
+              ],
+            ),
+          ),
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children:[
+                    Container(
+                      height: 100,
+                      width: double.infinity,
+                      color: Colors.grey.shade200,
+                      child: Image.network(
+                        'https://wallpaperaccess.com/full/902489.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 5,
+                      left: 16,
+                      child:
+                      Text('Destaques da Semana', style: GoogleFonts.inter(color: Colors.white)),
+                    ),
+                    SizedBox(height: 8),
+                    Positioned(
+                      bottom: 6,
+                      child:
+                        Row(
+                          children: [
+                            Icon(Icons.circle, size: 10.0),
+                            SizedBox(width: 3),
+                            Icon(Icons.circle, size: 10.0),
+                            SizedBox(width: 3),
+                            Icon(Icons.circle, size: 10.0),
+                          ],
+                        ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30),
+          GridView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 15,
+            ),
+            children: [
+              buildContainer(),
+              buildContainer(),
+              buildContainer(),
+              buildContainer(),
+              buildContainer(),
+              buildContainer(),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   buildContainer(){
     return Container(
-      margin: EdgeInsets.only(bottom: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.0),
             child: Image.network(
-              'https://a0.muscache.com/im/pictures/miso/Hosting-1175454379947905292/original/1873def9-5710-403f-b1f1-b2c766f61e31.jpeg?im_w=1200',
+              'https://a0.muscache.com/im/pictures/miso/Hosting-1175454379947905292/original/1873def9-5710-403f-b1f1-b2c766f61e31.jpeg?im_w=1200', fit: BoxFit.cover,
             ),
           ),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              buildText(
-                text: 'Harlingen, Netherlands',
-                fontSize: 17.0,
-                fontWeight: FontWeight.w600,
-              ),
-              Spacer(),
-              Icon(Icons.star, size: 16),
-              buildText(
-                text: '4.76',
-                fontSize: 16.0,
-                color: Colors.black,
-              ),
-            ],
-          ),
-          buildText(text: 'Professional Host'),
-          buildText(text: '18 - 23 Dec'),
+          SizedBox(height: 5),
+          buildText(text: 'Professional Host', color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.normal),
+          buildText(text: '18 - 23 Dec', color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.normal),
           buildText(
             text: '\$1,065 total',
+            color: Colors.black,
+            fontSize: 10.0,
             fontWeight: FontWeight.w600,
           ),
         ],
