@@ -52,7 +52,7 @@ Widget Body() {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(60),
               child: Image.network(
-                'https://via.placeholder.com/120',
+                'https://cdn-icons-png.flaticon.com/128/848/848043.png',
                 width: 120,
                 height: 120,
                 fit: BoxFit.cover,
