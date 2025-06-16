@@ -1,0 +1,1 @@
+ C:\\Users\\Aluno\\StudioProjects\\projetopmovel-telaInicial\\.dart_tool\\flutter_build\\3f20af46d771dfd90eaed00dc910d91e\\native_assets.yaml: 
