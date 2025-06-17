@@ -1,37 +1,49 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const ReservaDeQuartosApp());
-}
+class HotelBookingApp extends StatelessWidget {
+  const HotelBookingApp({super.key});
 
-class ReservaDeQuartosApp extends StatelessWidget {
-  const ReservaDeQuartosApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Reserva de Quartos',
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const TelaReservaQuarto(),
+      home: const HotelBookingScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class TelaReservaQuarto extends StatefulWidget {
-  const TelaReservaQuarto({super.key});
+
+class HotelBookingScreen extends StatefulWidget {
+  const HotelBookingScreen({super.key});
+  
+
 
   @override
-  State<TelaReservaQuarto> createState() => _TelaReservaQuartoState();
+  State<HotelBookingScreen> createState() => _HotelBookingScreenState();
 }
 
-class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
-  final TextEditingController _checkInController =
-      TextEditingController(text: "01/07/2025");
-  final TextEditingController _checkOutController =
-      TextEditingController(text: "05/07/2025");
-  final TextEditingController _guestsController =
-      TextEditingController(text: "1");
+
+class _HotelBookingScreenState extends State<HotelBookingScreen> {
+  final TextEditingController _checkInController = TextEditingController();
+  final TextEditingController _checkOutController = TextEditingController();
+  final TextEditingController _guestsController = TextEditingController(text: "1");
+
+
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      controller.text = "${picked.day.toString().padLeft(2, '0')}/${picked.month.toString().padLeft(2, '0')}/${picked.year}";
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +62,8 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Reserva de Quartos do Hotel',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
+                  'Reserva de Quartos Do Hotel',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 buildDateField("Chegada", _checkInController),
@@ -64,16 +72,19 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
                 const SizedBox(height: 10),
                 buildGuestField(),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Reserva realizada!")),
-                    );
-                  },
-                  child: const Text('Reservar'),
-                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(   backgroundColor: Color(0xFF228B22),
+                    ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Reserva realizada!")),
+                      );
+                    },
+                    child: const Text('Reservar'),
+                  ),
+                )
               ],
             ),
           ),
@@ -82,15 +93,12 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
     );
   }
 
+
   Widget buildDateField(String label, TextEditingController controller) {
     return TextField(
       controller: controller,
       readOnly: true,
-      onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Este campo é apenas ilustrativo.")),
-        );
-      },
+      onTap: () => _selectDate(context, controller),
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: const Icon(Icons.calendar_today, color: Colors.red),
@@ -98,6 +106,7 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
       ),
     );
   }
+
 
   Widget buildGuestField() {
     return TextField(
