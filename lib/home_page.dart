@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
           Icons.settings,
           color: Colors.white,
         ),
+        SizedBox(width: 20),
       ],
       centerTitle: false,
       backgroundColor: Colors.green,
@@ -64,11 +65,12 @@ class _HomePageState extends State<HomePage> {
               children: [
                 ClipRRect(
                   child: Image.network(
-                    'https://static.vecteezy.com/system/resources/previews/019/879/186/large_2x/user-icon-on-transparent-background-free-png.png', width: 50, height: 50,
+                    'https://static.vecteezy.com/system/resources/previews/019/879/186/large_2x/user-icon-on-transparent-background-free-png.png', width: 40, height: 40,
                   ),
                 ),
-                SizedBox(width: 10),
                 Text('Username'),
+                SizedBox(width: 7),
+                Icon(Icons.circle, color: Color(0xFF21D375), size: 4),
               ],
             ),
           ),
