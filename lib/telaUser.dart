@@ -9,7 +9,6 @@ class TelaUser extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      debugShowCheckedModeBanner: false,
       home: UserPage(),
     );
   }
