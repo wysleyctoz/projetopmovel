@@ -1,30 +1,33 @@
-import 'package:flutter/material.dart'; // Importa o pacote principal do Flutter para usar componentes visuais
-
+import 'package:flutter/material.dart'; 
 void main() {
-  runApp(const ReservaDeQuartosApp()); // Função principal que inicia o app chamando o widget principal
-}
+  runApp(const ReservaDeQuartosApp());
+} 
 
 // Widget principal do aplicativo
 class ReservaDeQuartosApp extends StatelessWidget {
-  const ReservaDeQuartosApp({super.key}); // Construtor com super.key para identificação do widget
+  const ReservaDeQuartosApp({super.key}); // Construtor com super.key (super. key é usado para passar a chave para a classe pai (StatelessWidget ou StatefulWidget
+  //StatelessWidget é usado para elementos estáticos da interface do usuário que não precisam ser atualizados após a criação, enquanto StatefulWidget 
+ // é usado para elementos dinâmicos que podem mudar seu estado em resposta a eventos ou interações do usuário. ),
+   // ajudando o Flutter a gerenciar atualizações de IU com eficiência.) para identificação do widget
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Reserva de Quartos', // Título do app (visível em algumas plataformas)
+      title: 'Reserva de Quartos', // Título do app
       theme: ThemeData(primarySwatch: Colors.green), // Define o tema de cor verde
       home: const TelaReservaQuarto(), // Tela inicial do aplicativo
-      debugShowCheckedModeBanner: false, // Remove a faixa "debug" da interface
+      debugShowCheckedModeBanner: false, // Remover aquela faixa "debug" da interface da tela que fica na borda
     );
   }
 }
 
-// Tela principal da reserva de quartos
+// Tela principal das reservas
 class TelaReservaQuarto extends StatefulWidget {
   const TelaReservaQuarto({super.key});
 
   @override
-  State<TelaReservaQuarto> createState() => _TelaReservaQuartoState(); // Cria o estado da tela
+  State<TelaReservaQuarto> createState() => _TelaReservaQuartoState(); // Cria o estado da tela em que 
+  // ela é Stateful que significa que ela não vai mudar o estado dela 
 }
 
 class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
@@ -46,20 +49,22 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold( // Estrutura básica da tela
-      backgroundColor: Colors.green.shade100, // Cor de fundo clara (verde)
-      body: SafeArea( // Garante que o conteúdo não fique sob o notch ou barra superior
-        child: Center( // Centraliza o conteúdo da tela
-          child: Container( // "Caixa" que envolve os campos e botões
+      backgroundColor: Colors.green.shade100, // Cor de fundo verde
+      body: SafeArea( // Garante que o conteúdo não fique sob a barra superior
+        child: Center( // Centraliza o conteúdo da tela deixando ele no centro dela
+          child: Container( // Container que vai deixar como se fosse a Caixa que envolve os campos de texto 
+          e os  botões
             margin: const EdgeInsets.all(20), // Espaço externo
             padding: const EdgeInsets.all(20), // Espaço interno
             decoration: BoxDecoration(
-              color: Colors.white, // Fundo branco
-              borderRadius: BorderRadius.circular(20), // Cantos arredondados
+              color: Colors.white, // Fundo do container que é branco
+              borderRadius: BorderRadius.circular(20), //  Aqui é para deixar os Cantos arredondados para dar uma
+              // diferença no container
             ),
-            child: Column( // Organiza os elementos na vertical
+            child: Column( // Organizar os elementos na vertical
               mainAxisSize: MainAxisSize.min, // A coluna só ocupa o espaço necessário
               children: [
-                const Text( // Título da tela
+                const Text(
                   'Reserva de Quartos do Hotel',
                   style: TextStyle(
                     fontSize: 24,
@@ -69,30 +74,31 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
                 ),
                 const SizedBox(height: 20), // Espaçamento
 
-                // Campo de data de chegada
+                // Campo de texto responsavel pela data de chegada
                 buildDateField("Chegada", _checkInController),
 
                 const SizedBox(height: 10), // Espaçamento
 
-                // Campo de data de saída
+                // Campo de texto responsavel pela data de saída
                 buildDateField("Saída", _checkOutController),
 
                 const SizedBox(height: 10), // Espaçamento
 
-                // Campo de quantidade de hóspedes
+                // Campo de texto responsavel pela quantidade de hóspedes
                 buildGuestField(),
 
-                const SizedBox(height: 20), // Espaçamento final
+                const SizedBox(height: 20), // Ultimo Espaçamento 
 
-                // Botão de reserva
+                // Botão de reservar
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green), // Estilo verde
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green), // Cor verde
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar( // Exibe confirmação
+                    ScaffoldMessenger.of(context).showSnackBar( 
+                      //Mesmo chamado de que utiliza para indicar que é um campo ilustratuvo so que nesse é da confirmação da reserva
                       const SnackBar(content: Text("Reserva realizada!")),
                     );
                   },
-                  child: const Text('Reservar'), // Texto do botão
+                  child: const Text('Reservar'),
                 ),
               ],
             ),
@@ -110,7 +116,7 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
       onTap: () => _showInfoSnackBar(context), // Ao tocar, mostra mensagem
       decoration: InputDecoration(
         labelText: label, // Nome do campo (Chegada ou Saída)
-        prefixIcon: const Icon(Icons.calendar_today, color: Colors.red), // Ícone de calendário
+        prefixIcon: const Icon(Icons.calendar_today, color: Colors.red), 
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), // Borda arredondada
       ),
     );
@@ -123,7 +129,7 @@ class _TelaReservaQuartoState extends State<TelaReservaQuarto> {
       keyboardType: TextInputType.number, // Abre teclado numérico
       decoration: InputDecoration(
         labelText: "Hóspedes", // Rótulo do campo
-        prefixIcon: const Icon(Icons.people, color: Colors.black), // Ícone de pessoas
+        prefixIcon: const Icon(Icons.people, color: Colors.black), 
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)), // Borda arredondada
       ),
     );
